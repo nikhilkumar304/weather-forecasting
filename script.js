@@ -47,8 +47,7 @@ function fetchWeatherData()
     fetch(`http://api.weatherapi.com/v1/current.json?key=35b55f21f780488eba7190314221407&q=${cityinput}`)
     .then(response => response.json())
     .then(data =>{
-        console.log(data);
-     
+
      dateoutput.innerHTML=data.location.localtime.substr(0,10);
      timeoutput.innerHTML=data.location.localtime.substr(11);
      nameoutput.innerHTML= data.location.name;
@@ -57,7 +56,7 @@ function fetchWeatherData()
      cloudoutput.innerHTML = data.current.cloud +"%";
      humidityoutput.innerHTML = data.current.humidity +"%";
      windoutput.innerHTML = `${data.current.wind_kph}km/h`;
-    
+   
 
     const iconId = data.current.condition.icon.substr("//cdn.weatherapi.com/weather/64x64/".length);
     icon.src = "./icons/" +iconId;
@@ -132,6 +131,15 @@ function fetchWeatherData()
         }
         app.style.opacity="1";
         }
+    
+    
     })
-}
+    .catch(()=>{
+        alert('city not found,please try again');
+        app.style.opacity="1";
+    });
+   
 
+}
+fetchWeatherData();
+app.style.opacity="1";
